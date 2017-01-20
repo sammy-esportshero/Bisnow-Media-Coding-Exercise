@@ -216,8 +216,8 @@ class Parser {
 		";
 		/*TEST: Verify query is what I expect it to be
 		echo $query;
-		echo "<br>";
-		$db->exec($query);*/
+		echo "<br>";*/
+		$db->exec($query);
 	}
 
 	/**
