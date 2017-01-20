@@ -1,0 +1,43 @@
+header {
+	text-align: center;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    text-align: left;
+    text-decoration: none;
+    padding: 0px 5px;
+}
+
+.fleft {
+	float: left;
+}
+.fright {
+	float: right;
+}
+
+.show
+{
+    display : block;
+    position : fixed;
+    z-index: 100;
+    background-image : url('loader.gif');
+    background-color:#666;
+    opacity : 0.4;
+    background-repeat : no-repeat;
+    background-position : center;
+    left : 0;
+    bottom : 0;
+    right : 0;
+    top : 0;
+}

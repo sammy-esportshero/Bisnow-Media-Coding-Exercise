@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<header>Number Test</header>
+<nav>
+	<ul>
+		<li><a href="Google.com">Google.com</a></li>
+		<li><a href="Bisnow.com">Bisnow.com</a></li>
+	</ul>
+</nav>
+<body>
+	<section>
+		<br><br>
+		<div id="loading"></div>
+		<form id="poster" method="post" action="Q5.php">
+			<input type="text" name="Number">
+			<input id="submit" type="submit" value="Submit">
+		</form>
+	</section>
+</body>
+<footer>
+	<h3 class="fleft">Bisnow Media 2016</h3>
+	<h3 class="fright">Sammy Mohamed</h3>
+</footer>
+<script>
+$('form').submit(function(e) {
+//VERIFY INPUT IS A NUMBER FROM 1-1000, show error
+number = $(this).find(':input[type="text"]').val();
+if(isNaN(number) || number < 1 || number > 1000) {
+	//ERROR
+	return;
+} 
+//BLOCK SUBMISSIONS
+$(this).find(':input[type=submit]').prop('disabled', true);
+
+//PUT UP LOADING SWIVEL
+$("div#loading").addClass('show');
+
+//QUERY PHP FILE
+post_data = {
+	'Number'     : $('input[name=Number]').val(), 
+};
+$.post('Q5.php', post_data, function(r) {
+		//APPEND PHP RESULT TO START OF FORM (AKA PREPEND)
+		$("#poster").prepend(r);
+		
+		//REMOVE SWIVEL
+		$("div#loading").removeClass('show');
+
+		//RE-ENABLE SUBMISSIOM
+		$("#submit").prop('disabled', false);	
+});
+
+
+//Don't refresh the page please
+e.preventDefault();
+});
+</script>
+</html>
