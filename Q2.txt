@@ -1,5 +1,16 @@
 QUESTION 2
+2) The following two questions do not necessarily have a specific right or wrong answer, thus the how and why are important. What type of class or OOP programming structure would make sense to use in the following scenarios? How and Why?
 
-What type of class or OOP programming structure would make sense to use in the following scenarios? How and why?
+2a. You are building an open source application framework, to handle sessions you would like to use Memcache by default but allow others to create modules for other session handling services.
+=====ANSWER=====
+If you are a good open source application framework like Laravel, you have an interface for session handling and a corresponding Memcache specific implementation (and perhaps other implementations). You then have a configuration in an clear, obvious to spot location, that can be changed to utilize another implementation. Then people contributing to your project can add an implementation for another session handling service to your project without any pain (they add their own implementation of aforementioned interface, and add a configuration option).
 
-2a. You are building an open source application framework, to handle sessions
+If you are a bad open source application framework like CodeIgniter, you do the same as the above except that you have the CodeIgniter core code rigorously verify at run-time that any modules being used for most things is in a specific subfolder within the CodeIgniter directory (ugh). 
+
+2b. You have many classes which need to share some methods, some of these classes already extend another unrelated class, some do not.
+=====ANSWER=====
+PHP (and Java for that matter) only allows for single inheritance. Since some of the classes already extend another class, we can't just add a class (concrete or abstract) that they all inherit from. The way that PHP (and Java) have adapted to this obvious design flaw is with a construct known as a trait. A trait solves the exact issue this problem describes. 
+
+Since we are told that only some of the classes extend another unrelated class, there is almost certainly no way we can redesign the classes that avoids the use of a trait somewhere. Also an interface is not the best bet here because the classes are sharing the methods (ie not implementing their own version of a common method). 
+
+In C++ however, I would probably add another class that all these classes inherit from. Now if only there was more web development being done in this wonderful language.
