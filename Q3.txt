@@ -1,1 +1,29 @@
 QUESTION 3
+You have a Mysql table with 500 Million rows. The structure is the following:
+
+CREATE TABLE `buildings` (
+
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+
+ `name` varchar(255) NOT NULL,
+
+ `type` enum('Highrise','Lowrise','Retail','Industrial') NOT NULL,
+
+`city` varchar(100) NOT NULL,
+
+ PRIMARY KEY (`id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+A sample query that would often need to run on the database is “SELECT * FROM posts WHERE type = ? AND city = ? LIMIT 500000”. Would you add an index or indices to this table other than the primary index? What are the pros and cons of doing so?
+
+Assuming there are no other related tables or different querying scenarios, do you think mysql is an optimal approach here? Why or why not and what might an alternative be?
+
+=====ANSWER=====
+You could add a clustered index over type and city. The speed of the read queries would go up tremendously, but (even) more disk space is required for this. Justifying the need for that or a different index would depend on what other queries are typically being run on this db. If for example, it is also common to run queries where the 'where' clause involves only type or only city, having two non-clustered indices (one for each of type and city) might be a better solution. Or if a lot of other queries run could involve other columns than type or city in the where clause, then the best solution might be neither of the previous I suggested (would need more information to flush this scenario out). If a lot of the other queries run involve adding data into the db, especially if those occur more often than the query in the question, the value of the clustered index I suggested goes down quite a bit. More context is really needed to make a final decision here.
+
+Regarding alternatives, let's talk about the data involved - it is literally neatly fit into a single, short table. There is no reason for me to believe that a non-traditional RDBMS makes sense here. If the data were unstructured, loosely coupled, better fit to a graph or other non-tabular format - then maybe it would make sense to consider a NoSQL solution.
+
+Now lets' talk about the queries being run - they are all reads. Yet another reason to stick with a traditional RDBMS. They scale perfectly well on reads. It's scaling writes that really gets interesting.
+
+While MySQL is a great, lightweight, open-source DB fit for plenty of things, my thought is that when dealing with this much data (500 million rows) I'd move to SQL Server or Oracle.
