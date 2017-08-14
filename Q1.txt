@@ -1,0 +1,16 @@
+QUESTION 1
+You send roughly 30 Million emails monthly through an email infrastructure service similar to SendGrid and Mandrill, called SparkPost. SparkPost sends the message events associated with those email sends back to you via a post web hook so you can store and utilize them at a later date. Attached to this email is an example json body that you would receive from Sparkpost. You can read a description of the events included in this json here: https://support.sparkpost.com/customer/portal/articles/1976204-webhook-event-reference.
+Please describe the full stack of technologies you would use to receive the http requests webhook, process and store the data, and query these records in a meaningful way in the future.
+
+Which fields seem like they would be important for customer analytics? Which might be important for other reasons? What reasons?
+
+
+
+=====ANSWER=====
+This probably depends on what is meant here by 'customer analytics'. What kind of ways are we going to query the information? How often? How far back of data is relevant? What are we willing to spend? (In addition to the few grand per month committed for SparkPost to send that many emails that is)
+
+The short answer is that all you need to provide SparkPost with is a valid endpoint, from which execution should continue to parse the JSON and store it in any store.
+
+It's hard for me to say what I think would really be best here but I imagine what's most common for this kind of thing is to use Python or Scala and Hadoop. Not that you couldn't use PHP with Hadoop or that you couldn't use PHP and a traditional RDBMS for this problem (and in fact, setting up SparkPost to send and receive emails within a Laravel application is actually a piece of cake, and probably not much more difficult in another PHP MVC framework). It's just more common to work with big, ugly data in other languages and to perform analytics with this much data over Hadoop. 
+
+The fields that strike me as most relevant for customer analytics are campaign_id, rcpt_meta, rcpt_tags, rcpt_type, subject, target_link_name, target_link_url, rcpt_subs. AKA if we are trying to learn about which customers respond to which emails, the information about what campaign this email is associated with, what link was clicked, what subject attracted the customers attention and demographic data on the customer are what strike me as important.

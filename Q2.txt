@@ -1,0 +1,5 @@
+QUESTION 2
+
+What type of class or OOP programming structure would make sense to use in the following scenarios? How and why?
+
+2a. You are building an open source application framework, to handle sessions
