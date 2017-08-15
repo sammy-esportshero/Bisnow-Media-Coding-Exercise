@@ -2,7 +2,7 @@
 EDIT (08/14/2017):  This was a set of challenges I completed when interviewing for the position at Bisnow. I was told I was given a perfect score on all parts, and wound up working for Bisnow.
 
 The code for questions 4 and 5 can be found in the Q4 and Q5 folders respectively. 
-The answers to questions 1-3 can be found in Short Answers.txt
+The answers to questions 1-3 can be found in their respective Q1,Q2,Q3 .txt files.
 
 QUESTIONS:
 1) You send roughly 30 Million emails monthly through an email infrastructure service similar to SendGrid and Mandrill, called SparkPost.  SparkPost sends the message events associated with those email sends back to you via a post web hook so you can store and utilize them at a later date. Attached to this email is an example json body that you would receive from Sparkpost. You can read a description of the events included in this json here: https://support.sparkpost.com/customer/portal/articles/1976204-webhook-event-reference.
